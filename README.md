@@ -16,7 +16,7 @@ When you click the "submit button", fill in a div with the JSON string you will 
 
 These [hints](http://bioresearch.byu.edu/cs260/mongohints.html) may be helpful as your implement your node/mongodb application.
 
-Once you've implemented getting and adding comments, you should add the ability for users delete one comment at a time.
+Once you've implemented getting and adding comments, you should add the ability for users delete comments.
 
 Passoff:
 
