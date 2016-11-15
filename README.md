@@ -1,22 +1,10 @@
 # Lab5-MongoComments
-CS260 Mongo Lab
+CS260 Passport Lab
 
-Many social media applications allow users to insert comments. In this lab, you will configure a MongoDB database and connect it to your node.js web server. 
-
-Create a jquery application to display entries from the database and allow users to enter new comments. Your output should look something like this:
-
+Authentication is a critical part of almost any application.  Passport allows you to use an authenticaion framework for local database authentication as well as authentication through google, twitter or facebook.  In this lab, you will set up local authentication as shown in the textbook.
 ------
 
-![Example Comments Page](Example.png)
-
-
 ----
-
-When you click the "submit button", fill in a div with the JSON string you will send to the POST interface of your REST service. When the REST service returns, fill in the next div with "success". When the user clicks "show comments", contact the GET interface of your REST service and retrieve all of the comments currently in the database and print them in an unordered list.
-
-These [hints](http://bioresearch.byu.edu/cs260/mongohints.html) may be helpful as your implement your node/mongodb application.
-
-Once you've implemented getting and adding comments, you should add the ability for users delete comments.
 
 Passoff:
 
