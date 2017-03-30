@@ -28,18 +28,24 @@ db.on('error', console.error.bind(console, 'connection error:')); //Checks for c
 db.once('open', function() { //Lets us know when we're connected
 console.log('Connected');
 
-if (Types.find().length == 0){
-	//write default categories
-	for(i = 0; i < defaults.length; i++) {
-		var newType = new Types({Category: defaults[i]}); //[3]
-		// console.log(newcomment); //[3]
-		newType.save(function(err, post) { //[4]
-			  if (err) return console.error(err);
-			  console.log(post);
-			});
-	}
-}
+	Types.find(function(err,returnlist){
+		if(returnlist.length == 0){
+			//write default categories
+			for(i = 0; i < defaults.length; i++) {
+				var newType = new Types({Category: defaults[i]}); //[3]
+				// console.log(newcomment); //[3]
+				newType.save(function(err, post) { //[4]
+					  if (err) return console.error(err);
+					  // console.log(post);
+					});
+			}
+		}
+	});
+
 });
+
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

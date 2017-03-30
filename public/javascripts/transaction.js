@@ -107,20 +107,23 @@ $(function() {
 	 $.getJSON('type', function(data) {
       console.log(data);
 	  //for each thing in list:
-		jQuery.each( defaultCategories, function( i, category ) {
+		jQuery.each(data, function( i, obj ) {
 		  //add to categories.
-		  	list.prepend($('<option>', {value:category, text:category}));
-		    list2.prepend($('<option>', {value:category, text:category}));
+		  console.log(obj);
+		  	list.prepend($('<option>', {value:obj.Category, text:obj.Category}));
+		    list2.prepend($('<option>', {value:obj.Category, text:obj.Category}));
 
       });
+
+		//if the server didn't gimme any responses, do it the regular way, with the default categories.
+		if($('#category option').length < 2) {
+			jQuery.each( defaultCategories, function( i, category ) {
+				list.prepend($('<option>', {value:category, text:category}));
+			    list2.prepend($('<option>', {value:category, text:category}));
+			  });
+		}
 	});
 	
-	//if the server didn't gimme any responses, do it the regular way, with the default categories.
-	if($('#category > option').length < 2) {
-		jQuery.each( defaultCategories, function( i, category ) {
-			list.prepend($('<option>', {value:category, text:category}));
-		    list2.prepend($('<option>', {value:category, text:category}));
-		  });
-	}
+
 });
 
