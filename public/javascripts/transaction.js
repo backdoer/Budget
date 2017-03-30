@@ -7,14 +7,15 @@ $(document).ready(function(){
 
   $("#postTransaction").click(function(){
 	  var transaction;
-	$('#mySelectBox option').each(function() {
+	$('#category option').each(function() {
       if(this.selected) {
-		  transaction = {Category:$('#other').val(),Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
+		  transaction = {Category:$('#otherCategory').val(),Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
 	  }
 	});
-	if (transaction = '') {
+	if (transaction == '') {
 	  transaction = {Category:$("#category").val(),Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
 	}
+	alert(transaction);
 	json_trans = JSON.stringify(transaction);
 
 
@@ -87,7 +88,7 @@ $(document).ready(function(){
 	  
 	  $('#category').change(function() {
     	if ($(this).val() === 'other') {
-		$("#otherCategories").html('<input type="text" id="other" placeholder="enter new category">');
+		$("#otherCategories").html('<input type="text" id="otherCategory" placeholder="enter new category">');
 		}
 		else {
 			$("#otherCategories").html('');
@@ -116,11 +117,13 @@ $(function() {
 	});
 	
 	//if the server didn't gimme any responses, do it the regular way, with the default categories.
+	/*
 	if($('#category > option').length < 2) {
 		jQuery.each( defaultCategories, function( i, category ) {
 			list.prepend($('<option>', {value:category, text:category}));
 		    list2.prepend($('<option>', {value:category, text:category}));
 		  });
 	}
+	*/ 
 });
 
