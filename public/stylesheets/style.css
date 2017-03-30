@@ -1,21 +1,30 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color:#336699;
+  color:white;
 }
 
 a {
   color: #00B7FF;
 }
 
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
     padding: 8px;
 }
 
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background:#84C1C1;
+}
+tr:nth-child(odd) {
+	    background:#336699;
+}
+
+#addTransaction {
+	max-width:1024px;
+}
+
+#reports {
+		max-width:1024px;
+}
