@@ -17,16 +17,16 @@ function getCategories(){
 		jQuery.each(data, function( i, obj ) {
 		  //add to categories.
 		  console.log(obj);
-		  	list.append($('<option>', {value:obj._id, text:obj._id}));
-		    list2.append($('<option>', {value:obj._id, text:obj._id}));
+		  	list.append($('<option>', {value:obj.Category, text:obj.Category}));
+		    list2.append($('<option>', {value:obj.Category, text:obj.Category}));
 
       });
 
 		//if the server didn't gimme any responses, do it the regular way, with the default categories.
 		if($('#category option').length < 2) {
 			jQuery.each( defaultCategories, function( i, category ) {
-				list.append($('<option>', {value:_id, text:_id}));
-			    list2.append($('<option>', {value:_id, text:_id}));
+				list.append($('<option>', {value:Category, text:Category}));
+			    list2.append($('<option>', {value:Category, text:Category}));
 			  });
 		}
 	});
