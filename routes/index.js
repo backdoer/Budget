@@ -4,14 +4,16 @@ var router = express.Router();
 /* Set up mongoose in order to connect to mongo database */
 var mongoose = require('mongoose'); //Adds mongoose as a usable dependency
 
-mongoose.connect('mongodb://localhost/commentDB'); //Connects to a mongo database called "commentDB"
+mongoose.connect('mongodb://localhost/transactionDB'); //Connects to a mongo database called "commentDB"
 
-var commentSchema = mongoose.Schema({ //Defines the Schema for this database
-Name: String,
-Comment: String
+var transactionSchema = mongoose.Schema({ //Defines the Schema for this database
+	Category: String,
+	Notes: String,
+	Amount: Number,
+	Month: Number
 });
 
-var Comment = mongoose.model('Comment', commentSchema); //Makes an object from that schema as a model
+var Transaction = mongoose.model('Transaction', transactionSchema); //Makes an object from that schema as a model
 
 var db = mongoose.connection; //Saves the connection as a variable to use
 db.on('error', console.error.bind(console, 'connection error:')); //Checks for connection errors
@@ -25,23 +27,26 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET comments from database */
-router.get('/comment', function(req, res, next) {
+router.get('/transaction', function(req, res, next) {
 	console.log("In the GET route?");
-	Comment.find(function(err,commentList) { //Calls the find() method on your database
+	var type = req.query['Type'];
+	delete req.query['Type'];
+
+	Transaction.find(req.query, function(err,transactionList) { //Calls the find() method on your database
 	  if (err) return console.error(err); //If there's an error, print it out
 	  else {
-	    console.log(commentList); //Otherwise console log the comments you found
-	    res.json(commentList); //Then send the comments
+	    console.log(transactionList); //Otherwise console log the comments you found
+	    res.json(transactionList); //Then send the comments
 	  }
 	})
 });
 
 /* POST comment to database */
-router.post('/comment', function(req, res, next) {
+router.post('/transaction', function(req, res, next) {
 	// console.log(req.body);
-	var newcomment = new Comment(req.body); //[3]
+	var newtransaction = new Transaction(req.body); //[3]
 	// console.log(newcomment); //[3]
-	newcomment.save(function(err, post) { //[4]
+	newtransaction.save(function(err, post) { //[4]
 		  if (err) return console.error(err);
 		  console.log(post);
 		  res.sendStatus(200);
@@ -49,9 +54,9 @@ router.post('/comment', function(req, res, next) {
 });
 
 /* POST comment to database */
-router.delete('/comment', function(req, res, next) {
+router.delete('/transaction', function(req, res, next) {
 	console.log("IN THE DELETE ROUTE");
-	db.collections.comments.remove({});
+	db.collections.transaction.remove({});
     res.sendStatus(200);
 });
 

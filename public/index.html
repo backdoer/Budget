@@ -1,28 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Comments!</title>
+<title>Budget</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="javascripts/comments.js"></script>
+<script src="javascripts/transaction.js"></script>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 
 <body>
-<h2>New Comment</h2>
-<form id="commentForm" action="">
-<label for="name">Name: </label><input type="text" id="Name" placeholder="Name"><br>
-<label for="comment">comment: </label><input type="text" id="Comment" placeholder="Comment"><br>
+<h1>2017 Budget</h1>
+<h2>New Transaction</h2>
+<form id="transactionForm" action="">
+	<label for="month">Month: </label>
+	<select id="month">
+	  <option value="1">Jan</option>
+	  <option value="2">Feb</option>
+	  <option value="3">Mar</option>
+	  <option value="4">Apr</option>
+	  <option value="5">May</option>
+	  <option value="6">Jun</option>
+	  <option value="7">Jul</option>
+	  <option value="8">Aug</option>
+	  <option value="9">Sep</option>
+	  <option value="10">Oct</option>
+	  <option value="11">Nov</option>
+	  <option value="12">Dec</option>
+	</select>
+	<br>
+<label for="category">Category: </label>
+	<select id="category">
+	  <option value="food">Food</option>
+	  <option value="entertainment">Entertainment</option>
+	  <option value="transportation">Transportation</option>
+	  <option value="housing">Housing</option>
+	  <option value="dates">Dates</option>
+	</select>
+	<br>
+<label for="amount">Amount: </label><input type="number" id="amount"><br>
+<label for="notes">Notes: </label><input type="text" id="notes"><br>
 </form>
 
-<button id="postComment">Post Comment</button>
-<div id="json"></div>
-<div id="done"></div>
+<button id="postTransaction">Post Transaction</button>
 
 
-<h2>Actions</h2>
-<button id="getComments">Get Comments</button>
-<button id="deleteComments">Delete All</button>
+<!-- <h2>Actions</h2> -->
 
-<h2>Comments</h2>
-<div id="comments"></div>
+<h2>Transactions</h2>
+	<label for="month_filter">Month: </label>
+	<select id="month_filter">
+	  <option value="*">All Months</option>
+	  <option value="1">Jan</option>
+	  <option value="2">Feb</option>
+	  <option value="3">Mar</option>
+	  <option value="4">Apr</option>
+	  <option value="5">May</option>
+	  <option value="6">Jun</option>
+	  <option value="7">Jul</option>
+	  <option value="8">Aug</option>
+	  <option value="9">Sep</option>
+	  <option value="10">Oct</option>
+	  <option value="11">Nov</option>
+	  <option value="12">Dec</option>
+	  
+	</select>&nbsp;&nbsp;
+	<label for="category_filter">Category: </label>
+	<select id="category_filter">
+	  <option value="*">All Categories</option>
+	  <option value="food">Food</option>
+	  <option value="entertainment">Entertainment</option>
+	  <option value="transportation">Transportation</option>
+	  <option value="housing">Housing</option>
+	  <option value="dates">Dates</option>
+
+	</select>&nbsp;&nbsp;
+	<label for="type_filter">Type: </label>
+	<select id="type_filter">
+	  <option value="individual_trans">Individual Transactions</option>
+	  <option value="aggregated_trans">Aggregated Transactions</option>
+	</select>
+	<br><br>
+	<button id="getTransactions">Get Report</button>
+	<br><br>
+<table id="transactions">
+</table>
+
 </body>
 </html>
