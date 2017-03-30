@@ -3,80 +3,98 @@
 <head>
 <title>Budget</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 <script src="javascripts/transaction.js"></script>
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
-
 <body>
-<h1>2017 Budget</h1>
-<h2>Add Transaction</h2>
-<form id="transactionForm" action="">
-	<label for="month">Month: </label>
-	<select id="month">
-	  <option value="1">Jan</option>
-	  <option value="2">Feb</option>
-	  <option value="3">Mar</option>
-	  <option value="4">Apr</option>
-	  <option value="5">May</option>
-	  <option value="6">Jun</option>
-	  <option value="7">Jul</option>
-	  <option value="8">Aug</option>
-	  <option value="9">Sep</option>
-	  <option value="10">Oct</option>
-	  <option value="11">Nov</option>
-	  <option value="12">Dec</option>
-	</select>
-	<br>
-   <span id="categories">
-<label for="category">Category: </label>
-	<select id="category" name="category">
-	</select>
-    <span id="otherCategories">
-		<input type="text" id="otherCategory" placeholder="enter new category">
-    </span>
-    </span>
-	<br>
-<label for="amount">Amount: </label><input type="number" id="amount"><br>
-<label for="notes">Notes: </label><input type="text" id="notes"><br>
-</form>
+    <div class="container">
+		<div id="addTransaction">
+            <h2>Add Transaction</h2>
+            <form id="transactionForm" action="" class="form-horizontal">
+                <div class="form-group">
+        
+                    <label for="month" class="control-label col-sm-2">Month: </label>
+                    <div class="col-sm-10">
+                        <select id="month" class="form-control">
+                          <option value="1">Jan</option>
+                          <option value="2">Feb</option>
+                          <option value="3">Mar</option>
+                          <option value="4">Apr</option>
+                          <option value="5">May</option>
+                          <option value="6">Jun</option>
+                          <option value="7">Jul</option>
+                          <option value="8">Aug</option>
+                          <option value="9">Sep</option>
+                          <option value="10">Oct</option>
+                          <option value="11">Nov</option>
+                          <option value="12">Dec</option>
+                        </select>
+                    </div>
+                </div>
+           
+ 				<div class="form-group">
+                        <label for="category" class="control-label col-sm-2">Category: </label>
+                        <div class="col-sm-10">
+                            <select id="category" name="category" class="form-control">
+                                <option value="other" id="other">Other</option>
+                            </select>
+                            <span id="otherCategories">
+                                <input type="text" id="otherCategory" placeholder="enter new category">
+                            </span>
+                         </div>
+                </div>
 
-<button id="postTransaction">Post Transaction</button>
 
-
-<!-- <h2>Actions</h2> -->
-
-<h2>Transactions</h2>
-	<label for="month_filter">Month: </label>
-	<select id="month_filter">
-	  <option value="*">All Months</option>
-	  <option value="1">Jan</option>
-	  <option value="2">Feb</option>
-	  <option value="3">Mar</option>
-	  <option value="4">Apr</option>
-	  <option value="5">May</option>
-	  <option value="6">Jun</option>
-	  <option value="7">Jul</option>
-	  <option value="8">Aug</option>
-	  <option value="9">Sep</option>
-	  <option value="10">Oct</option>
-	  <option value="11">Nov</option>
-	  <option value="12">Dec</option>
-	   
-	</select>&nbsp;&nbsp;
-	<label for="category_filter">Category: </label>
-	<select id="category_filter">
-
-	</select>&nbsp;&nbsp;
-	<label for="type_filter">Type: </label>
-	<select id="type_filter">
-	  <option value="individual_trans">Individual Transactions</option>
-	  <option value="aggregated_trans">Aggregated Transactions</option>
-	</select>
-	<br><br>
-	<button id="getTransactions">Get Report</button>
-	<br><br>
-<table id="transactions">
-</table>
-
+        <label for="amount">Amount: </label><input type="number" id="amount"><br>
+        <label for="notes">Notes: </label><input type="text" id="notes"><br>
+        </form>
+        
+        <button id="postTransaction">Post Transaction</button>
+        
+        </div>
+    <!-- <h2>Actions</h2> -->
+    
+    <h2>Transactions</h2>
+        <label for="month_filter">Month: </label>
+        <select id="month_filter">
+          <option value="*">All Months</option>
+          <option value="1">Jan</option>
+          <option value="2">Feb</option>
+          <option value="3">Mar</option>
+          <option value="4">Apr</option>
+          <option value="5">May</option>
+          <option value="6">Jun</option>
+          <option value="7">Jul</option>
+          <option value="8">Aug</option>
+          <option value="9">Sep</option>
+          <option value="10">Oct</option>
+          <option value="11">Nov</option>
+          <option value="12">Dec</option>
+           
+        </select>&nbsp;&nbsp;
+        <label for="category_filter">Category: </label>
+        <select id="category_filter">
+    
+        </select>&nbsp;&nbsp;
+        <label for="type_filter">Type: </label>
+        <select id="type_filter">
+          <option value="individual_trans">Individual Transactions</option>
+          <option value="aggregated_trans">Aggregated Transactions</option>
+        </select>
+        <br><br>
+        <button id="getTransactions">Get Report</button>
+        <br><br>
+    <table id="transactions">
+    </table>
+</div>
 </body>
 </html>
