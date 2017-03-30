@@ -65,7 +65,8 @@ function getCategories(){
 	getCategories();
 	
 
-  $("#postTransaction").click(function(){
+  $("#transactionForm").submit(function(e){
+  	e.preventDefault();
 	var transaction;
 
 	var category;
