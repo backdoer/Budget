@@ -15,7 +15,7 @@ var transactionSchema = mongoose.Schema({ //Defines the Schema for this database
 
 //have an array of addable types
 var transactionType = mongoose.Schema({
-	Category: String
+	_id: String
 });
 
 var defaults = ["Food","Entertainment","Transportation","Housing","Dates"];
