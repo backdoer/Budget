@@ -32,8 +32,11 @@ function getCategories(){
 	});
 }
 
-  // Extracted logic into function so it can be used elsewhere
+  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Notes</th><th>Month</th></tr>";
+  var agg_trans_header = "<tr><th>Category</th><th>Amount</th><th>Month</th></tr>";
+
   function getTransactions(){
+
   	var parameters = {
   		Category: $("#category_filter").val(),
   		Month: $("#month_filter").val(),
@@ -95,7 +98,7 @@ function getCategories(){
 	contentType: "application/json; charset=utf-8",
 	success: function(data,textStatus) {
 	    console.log(textStatus);
-	    getTransactions();
+	    // getTransactions();
 	    getCategories();
 	}
 	})
@@ -111,8 +114,7 @@ function getCategories(){
 	}
 
 
-  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Notes</th><th>Month</th></tr>";
-  var agg_trans_header = "<tr><th>Category</th><th>Amount</th><th>Month</th></tr>";
+
   
 
 
