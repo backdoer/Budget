@@ -8,7 +8,24 @@ $(document).ready(function(){
   $("#postTransaction").click(function(){
 	var transaction;
 
-	var category = $("#category").val() == 'other' ? $('#otherCategory').val() : $("#category").val();
+	var category;
+	if ($("#category").val() == 'other'){
+		category = $('#otherCategory').val();
+			var url = "/type";
+			$.ajax({
+			url:url,
+			type: "POST",
+			data: JSON.stringify({Category: category}),
+			contentType: "application/json; charset=utf-8",
+			success: function(data,textStatus) {
+			    console.log(textStatus);
+			}
+		})
+
+	}
+	else {
+		category = $("#category").val();
+	}
 	var transaction = {Category:category,Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
 
 	json_trans = JSON.stringify(transaction);

@@ -102,10 +102,11 @@ router.delete('/transaction', function(req, res, next) {
 
 /* POST type to database */
 router.post('/type', function(req, res, next) {
-	// console.log(req.body);
-	var newType = new transactionType(req.body); //[3]
+	console.log("POSTING NEW TYPE")
+	console.log(req.body);
+	var newType = new Types(req.body); //[3]
 	// console.log(newcomment); //[3]
-	newtransaction.save(function(err, post) { //[4]
+	newType.save(function(err, post) { //[4]
 		  if (err) return console.error(err);
 		  console.log(post);
 		  res.sendStatus(200);
