@@ -29,6 +29,9 @@ $(document).ready(function(){
     	}
 	}
 
+
+  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Notes</th><th>Month</th></tr>"
+
   // Extracted logic into function so it can be used elsewhere
   function getTransactions(){
   	var parameters = {
@@ -40,14 +43,15 @@ $(document).ready(function(){
   	deleteByValue(parameters, '*');
   	console.log(parameters);
 
+
+
 	$.getJSON('transaction?' + $.param(parameters), function(data) {
       console.log(data);
-      var everything = "<ul>";
+      var everything = ind_trans_header;
       for(var comment in data) {
         com = data[comment];
-        everything += "<li> Category: " + com.Category + " -- Amount: " + com.Amount + " -- Notes: " + com.Notes + " -- Month: " + com.Month + "</li>";
+        everything += "<tr><td>" + com.Category + "</td> <td> " + com.Amount + " </td><td>" + com.Notes + " </td><td> " + com.Month + "</td></tr>";
       }
-      everything += "</ul>";
       $("#transactions").html(everything);
     })
   }
