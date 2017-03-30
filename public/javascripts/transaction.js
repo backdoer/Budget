@@ -8,7 +8,8 @@ function getCategories(){
 	var list2 = $('#category_filter');
 	list.empty();
 	list2.empty();
-	list.append($('<option>', {value:'other', text:'Other'}))
+	list.append($('<option>', {value:'other', text:'Other'}));
+	list2.append($('<option>', {value:'*', text:'All Categories'}));
 	//go to "/type" route
 	 $.getJSON('type', function(data) {
       console.log(data);
@@ -136,10 +137,10 @@ function getCategories(){
 	  
 	  $('#category').change(function() {
     	if ($(this).val() === 'other') {
-		$("#otherCategories").html('<input type="text" id="otherCategory" placeholder="enter new category">');
+		$("#otherCategories").show();
 		}
 		else {
-			$("#otherCategories").html('');
+			$("#otherCategories").hide();
 		}
 	});
 
