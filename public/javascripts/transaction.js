@@ -30,27 +30,31 @@ $(document).ready(function(){
 	}
 
 
-  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Notes</th><th>Month</th></tr>"
+  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Month</th><th>Notes</th></tr>";
+  var agg_trans_header = "<tr><th>Category</th><th>Amount</th><th>Month</th></tr>";
 
   // Extracted logic into function so it can be used elsewhere
   function getTransactions(){
+  	var display_type = $("#type_filter").val()
   	var parameters = {
   		Category: $("#category_filter").val(),
   		Month: $("#month_filter").val(),
-  		Type: $("#type_filter").val()
+  		Type: display_type
   	}
 
   	deleteByValue(parameters, '*');
-  	console.log(parameters);
-
+  	var everything = display_type == 'individual_trans' ? ind_trans_header : agg_trans_header;
 
 
 	$.getJSON('transaction?' + $.param(parameters), function(data) {
       console.log(data);
-      var everything = ind_trans_header;
+      
       for(var comment in data) {
-        com = data[comment];
-        everything += "<tr><td>" + com.Category + "</td> <td> " + com.Amount + " </td><td>" + com.Notes + " </td><td> " + com.Month + "</td></tr>";
+        com = display_type == 'individual_trans' ? data[comment] : data[comment]._id;
+        static_com = data[comment];
+        everything += "<tr><td>" + com.Category + "</td> <td> " + static_com.Amount + " </td><td> " + com.Month + "</td>";
+        everything += display_type == 'individual_trans' ? "<td>" + com.Notes + " </td>" : "";
+        everything += "</tr>";
       }
       $("#transactions").html(everything);
     })
