@@ -13,12 +13,30 @@ var transactionSchema = mongoose.Schema({ //Defines the Schema for this database
 	Month: Number
 });
 
+//have an array of addable types
+var transactionType = mongoose.Scheme({
+	Category: String
+});
+
+var defaults = ["Food","Entertainment","Transportation","Housing","Dates"];
+
 var Transaction = mongoose.model('Transaction', transactionSchema); //Makes an object from that schema as a model
+var Types = mongoose.model('TransactionType', transactionType);
 
 var db = mongoose.connection; //Saves the connection as a variable to use
 db.on('error', console.error.bind(console, 'connection error:')); //Checks for connection errors
 db.once('open', function() { //Lets us know when we're connected
 console.log('Connected');
+
+//write default categories
+for(i = 0; i < defaultTypes.length; i++) {
+	var newType = new Types(defaultTypes[i]); //[3]
+	// console.log(newcomment); //[3]
+	newType.save(function(err, post) { //[4]
+		  if (err) return console.error(err);
+		  console.log(post);
+		});
+}
 });
 
 /* GET home page. */
@@ -72,6 +90,29 @@ router.delete('/transaction', function(req, res, next) {
 	console.log("IN THE DELETE ROUTE");
 	db.collections.transaction.remove({});
     res.sendStatus(200);
+});
+
+/* POST type to database */
+router.post('/type', function(req, res, next) {
+	// console.log(req.body);
+	var newType = new transactionType(req.body); //[3]
+	// console.log(newcomment); //[3]
+	newtransaction.save(function(err, post) { //[4]
+		  if (err) return console.error(err);
+		  console.log(post);
+		  res.sendStatus(200);
+	});
+});
+
+router.get('/type', function(req, res, next) {
+	console.log("In the GET route");
+	transactionType.find(function(err,categories) { //Calls the find() method on your database
+	  if (err) return console.error(err); //If there's an error, print it out
+	  else {
+		console.log(categories); //Otherwise console log the comments you found
+			res.json(categories); //Then send the comments
+		  }
+	  });
 });
 
 module.exports = router;
