@@ -139,10 +139,11 @@ function getCategories(){
 	  
 	  $('#category').change(function() {
     	if ($(this).val() === 'other') {
-		$("#otherCategories").show();
+		$("#otherCategories").show().attr('required', 'required');;
+
 		}
 		else {
-			$("#otherCategories").hide();
+			$("#otherCategories").hide().removeAttr('required');
 		}
 	});
 
