@@ -139,11 +139,13 @@ function getCategories(){
 	  
 	  $('#category').change(function() {
     	if ($(this).val() === 'other') {
-		$("#otherCategories").show().attr('required', 'required');;
+		$("#otherCategories").show();
+		$('#otherCategory').attr('required', 'required');
 
 		}
 		else {
-			$("#otherCategories").hide().removeAttr('required');
+			$("#otherCategories").hide();
+			$('#otherCategory').removeAttr('required');
 		}
 	});
 
