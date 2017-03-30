@@ -53,7 +53,7 @@ function getCategories(){
 
       for(var transaction in data) {
         com = individual_trans ? data[transaction] : data[transaction]._id;
-        everything += "<tr><td>" + com.Category + "</td> <td> " + data[transaction].Amount + " </td>";
+        everything += "<tr><td>" + com.Category + "</td> <td> $" + data[transaction].Amount + " </td>";
         everything += individual_trans ? "<td>" + com.Notes + " </td>" : "";
         everything += "<td> " + com.Month + "</td></tr>";
       }
