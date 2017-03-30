@@ -28,16 +28,24 @@ db.on('error', console.error.bind(console, 'connection error:')); //Checks for c
 db.once('open', function() { //Lets us know when we're connected
 console.log('Connected');
 
-//write default categories
-for(i = 0; i < defaultTypes.length; i++) {
-	var newType = new Types(defaultTypes[i]); //[3]
-	// console.log(newcomment); //[3]
-	newType.save(function(err, post) { //[4]
-		  if (err) return console.error(err);
-		  console.log(post);
-		});
-}
+	Types.find(function(err,returnlist){
+		if(returnlist.length == 0){
+			//write default categories
+			for(i = 0; i < defaults.length; i++) {
+				var newType = new Types({Category: defaults[i]}); //[3]
+				// console.log(newcomment); //[3]
+				newType.save(function(err, post) { //[4]
+					  if (err) return console.error(err);
+					  // console.log(post);
+					});
+			}
+		}
+	});
+
 });
+
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -94,10 +102,11 @@ router.delete('/transaction', function(req, res, next) {
 
 /* POST type to database */
 router.post('/type', function(req, res, next) {
-	// console.log(req.body);
-	var newType = new transactionType(req.body); //[3]
+	console.log("POSTING NEW TYPE")
+	console.log(req.body);
+	var newType = new Types(req.body); //[3]
 	// console.log(newcomment); //[3]
-	newtransaction.save(function(err, post) { //[4]
+	newType.save(function(err, post) { //[4]
 		  if (err) return console.error(err);
 		  console.log(post);
 		  res.sendStatus(200);
@@ -105,8 +114,8 @@ router.post('/type', function(req, res, next) {
 });
 
 router.get('/type', function(req, res, next) {
-	console.log("In the GET route");
-	transactionType.find(function(err,categories) { //Calls the find() method on your database
+	console.log("In the GET route for Categories");
+	Types.find(function(err,categories) { //Calls the find() method on your database
 	  if (err) return console.error(err); //If there's an error, print it out
 	  else {
 		console.log(categories); //Otherwise console log the comments you found

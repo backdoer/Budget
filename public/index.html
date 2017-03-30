@@ -3,7 +3,7 @@
 <head>
 <title>Budget</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="javasctripts/transaction.js"></script>
+<script src="javascripts/transaction.js"></script>
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 
@@ -30,9 +30,10 @@
    <span id="categories">
 <label for="category">Category: </label>
 	<select id="category" name="category">
-      <option value="other" id="other">Other</option>
 	</select>
-    <span id="otherCategories"></span>
+    <span id="otherCategories">
+		<input type="text" id="otherCategory" placeholder="enter new category">
+    </span>
     </span>
 	<br>
 <label for="amount">Amount: </label><input type="number" id="amount"><br>
@@ -60,16 +61,10 @@
 	  <option value="10">Oct</option>
 	  <option value="11">Nov</option>
 	  <option value="12">Dec</option>
-	  
+	   
 	</select>&nbsp;&nbsp;
 	<label for="category_filter">Category: </label>
 	<select id="category_filter">
-	  <option value="*">All Categories</option>
-	  <option value="food">Food</option>
-	  <option value="entertainment">Entertainment</option>
-	  <option value="transportation">Transportation</option>
-	  <option value="housing">Housing</option>
-	  <option value="dates">Dates</option>
 
 	</select>&nbsp;&nbsp;
 	<label for="type_filter">Type: </label>
