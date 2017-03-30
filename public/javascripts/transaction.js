@@ -6,18 +6,12 @@ $(document).ready(function(){
 	
 
   $("#postTransaction").click(function(){
-	  var transaction;
-	$('#category option').each(function() {
-      if(this.selected) {
-		  transaction = {Category:$('#otherCategory').val(),Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
-	  }
-	});
-	if (transaction == '') {
-	  transaction = {Category:$("#category").val(),Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
-	}
-	alert(transaction);
-	json_trans = JSON.stringify(transaction);
+	var transaction;
 
+	var category = $("#category").val() == 'other' ? $('#otherCategory').val() : $("#category").val();
+	var transaction = {Category:category,Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
+
+	json_trans = JSON.stringify(transaction);
 
 	var url = "/transaction";
 	$.ajax({
@@ -42,7 +36,9 @@ $(document).ready(function(){
 	}
 
 
-  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Notes</th><th>Month</th></tr>"
+  var ind_trans_header = "<tr><th>Category</th><th>Amount</th><th>Notes</th><th>Month</th></tr>";
+  var agg_trans_header = "<tr><th>Category</th><th>Amount</th><th>Month</th></tr>";
+  
 
   // Extracted logic into function so it can be used elsewhere
   function getTransactions(){
@@ -51,18 +47,20 @@ $(document).ready(function(){
   		Month: $("#month_filter").val(),
   		Type: $("#type_filter").val()
   	}
+  	var individual_trans = $("#type_filter").val() == 'individual_trans';
 
   	deleteByValue(parameters, '*');
   	console.log(parameters);
 
 
-
 	$.getJSON('transaction?' + $.param(parameters), function(data) {
-      console.log(data);
-      var everything = ind_trans_header;
-      for(var comment in data) {
-        com = data[comment];
-        everything += "<tr><td>" + com.Category + "</td> <td> " + com.Amount + " </td><td>" + com.Notes + " </td><td> " + com.Month + "</td></tr>";
+      var everything = individual_trans ? ind_trans_header : agg_trans_header;
+
+      for(var transaction in data) {
+        com = individual_trans ? data[transaction] : data[transaction]._id;
+        everything += "<tr><td>" + com.Category + "</td> <td> " + data[transaction].Amount + " </td>";
+        everything += individual_trans ? "<td>" + com.Notes + " </td>" : "";
+        everything += "<td> " + com.Month + "</td></tr>";
       }
       $("#transactions").html(everything);
     })
