@@ -65,13 +65,14 @@ function getCategories(){
 	getCategories();
 	
 
-  $("#transactionForm").submit(function(e){
-  	e.preventDefault();
+  $("#postTransaction").click(function(){
+
 	var transaction;
 
 	var category;
 	if ($("#category").val() == 'other'){
 		category = $('#otherCategory').val();
+		if (category){
 			var url = "/type";
 			$.ajax({
 			url:url,
@@ -82,28 +83,34 @@ function getCategories(){
 			    console.log(textStatus);
 			}
 		})
+		}
+		else {
+			alert("Please enter a category");
+		}
 
 	}
 	else {
 		category = $("#category").val();
 	}
-	var transaction = {Category:category,Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
+	if (category)
+	{
+		var transaction = {Category:category,Amount:$("#amount").val(), Notes:$("#notes").val(), Month:$("#month").val() };
 
-	json_trans = JSON.stringify(transaction);
+		json_trans = JSON.stringify(transaction);
 
-	var url = "/transaction";
-	$.ajax({
-	url:url,
-	type: "POST",
-	data: json_trans,
-	contentType: "application/json; charset=utf-8",
-	success: function(data,textStatus) {
-	    console.log(textStatus);
-	    // getTransactions();
-	    getCategories();
+		var url = "/transaction";
+		$.ajax({
+		url:url,
+		type: "POST",
+		data: json_trans,
+		contentType: "application/json; charset=utf-8",
+		success: function(data,textStatus) {
+		    console.log(textStatus);
+		    // getTransactions();
+		    getCategories();
+		}
+		})
 	}
-	})
-
   });
 
   function deleteByValue(obj, val) {
@@ -141,12 +148,9 @@ function getCategories(){
 	  $('#category').change(function() {
     	if ($(this).val() === 'other') {
 		$("#otherCategories").show();
-		$('#otherCategory').attr('required', 'required');
-
 		}
 		else {
 			$("#otherCategories").hide();
-			$('#otherCategory').removeAttr('required');
 		}
 	});
 
